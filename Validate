@@ -1,0 +1,29 @@
+<?php
+session_start();
+$con=mysqli_connect('localhost','root','');
+mysqli_select_db($con, 'details');
+$Fname = $_POST['Fname'];
+$Lname = $_POST['Lname'];
+$email = $_POST['email'];
+$user = $_POST['user'];
+$password = $_POST['Password'];
+$gender = $_POST['Gender'];
+$dob = $_POST['dob'];
+$Sword = $_POST['Sword'];
+
+$s="select * from regista where username= '$user' && Password='$password'";
+
+$result = mysqli_query($con, $s);
+
+$num=mysqli_num_rows($result);
+
+if ($num==1) {
+    echo "username taken";
+
+}
+else{
+   $reg = "insert into regista(FirstName, LastName, Email, Username, Password, Gender, DateOfBirth, SecretWord) values ('$Fname', 'Lname' ,'$email', '$user', '$password', '$gender', 'dob', 'Sword')";
+          mysqli_query($con, $reg);
+          header("location:Login.php");
+        }
+?>
